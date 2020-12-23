@@ -14,21 +14,27 @@ _G[Addon.name] = Addon
 
 local EJOrder = {
 -- UiMapID   Boss Button Order                   Raid Wing Label Index, Key is Boss Index, Value is dungeonID
-  [409]  = {{1,2,3,4,5,6,7,8},                  {[1]=416,[5]=417}},                          -- Dragon Soul
-  [471]  = {{1,2,3,4,5,6},                      {[1]=527,[4]=528}},                          -- Mogu'shan Vaults
-  [474]  = {{1,2,3,4,5,6},                      {[1]=529,[4]=530}},                          -- Heart of Fear
-  [508]  = {{1,2,3,4,5,6,7,8,9,10,11,12},       {[1]=610,[4]=611,[7]=612,[10]=613}},         -- Throne of Thunder
-  [557]  = {{1,2,3,4,5,6,7,8,9,10,11,12,13,14}, {[1]=716,[5]=717,[9]=724,[12]=725}},         -- Siege of Orgrimmar
-  [612]  = {{1,2,4,3,5,6,7},                    {[1]=849,[3]=850,[7]=851}},                  -- Highmaul
-  [597]  = {{4,1,7,2,5,8,3,6,9,10},             {[4]=847,[2]=846,[3]=848,[10]=823}},         -- Blackrock Foundry
-  [661]  = {{1,2,3,5,4,6,7,8,11,9,10,12,13},    {[1]=982,[5]=983,[7]=984,[9]=985,[13]=986}}, -- Hellfire Citadel
-  [777]  = {{1,2,3,4,5,6,7},                    {[1]=1287,[4]=1288,[7]=1289}},               -- The Emerald Nightmare
-  [764]  = {{1,2,3,4,7,8,5,6,9,10},             {[1]=1290,[4]=1291,[5]=1292,[10]=1293}},     -- The Nighthold
-  [850]  = {{1,3,5,2,4,6,7,8,9},                {[1]=1494,[2]=1495,[7]=1496,[9]=1497}},      -- Tomb of Sargeras
-  [909]  = {{1,2,3,4,5,6,7,8,9,10,11},          {[1]=1610,[4]=1611,[7]=1612,[10]=1613}},     -- Antorus, the Burning Throne
-  [1148] = {{1,2,4,3,5,6,7,8},                  {[1]=1731,[3]=1732,[7]=1733}},               -- Uldir
-  [1352] = {{1,3,2,4,5,6,7,8},                  {[1]=1945,[4]=1946,[7]=1947}},               -- Battle of Dazar'alor (Alliance)
-  [1358] = {{1,2,3,4,5,6,7,8},                  {[1]=1948,[4]=1949,[7]=1950}},               -- Battle of Dazar'alor (Horde)
+    [409]  = {{1,2,3,4,5,6,7,8},                  {[1]=416,[5]=417}},                          -- Dragon Soul
+    [471]  = {{1,2,3,4,5,6},                      {[1]=527,[4]=528}},                          -- Mogu'shan Vaults
+    [474]  = {{1,2,3,4,5,6},                      {[1]=529,[4]=530}},                          -- Heart of Fear
+    [508]  = {{1,2,3,4,5,6,7,8,9,10,11,12},       {[1]=610,[4]=611,[7]=612,[10]=613}},         -- Throne of Thunder
+    [557]  = {{1,2,3,4,5,6,7,8,9,10,11,12,13,14}, {[1]=716,[5]=717,[9]=724,[12]=725}},         -- Siege of Orgrimmar
+    [612]  = {{1,2,4,3,5,6,7},                    {[1]=849,[3]=850,[7]=851}},                  -- Highmaul
+    [597]  = {{4,1,7,2,5,8,3,6,9,10},             {[4]=847,[2]=846,[3]=848,[10]=823}},         -- Blackrock Foundry
+    [661]  = {{1,2,3,5,4,6,7,8,11,9,10,12,13},    {[1]=982,[5]=983,[7]=984,[9]=985,[13]=986}}, -- Hellfire Citadel
+    [777]  = {{1,2,3,4,5,6,7},                    {[1]=1287,[4]=1288,[7]=1289}},               -- The Emerald Nightmare
+    [764]  = {{1,2,3,4,7,8,5,6,9,10},             {[1]=1290,[4]=1291,[5]=1292,[10]=1293}},     -- The Nighthold
+    [850]  = {{1,3,5,2,4,6,7,8,9},                {[1]=1494,[2]=1495,[7]=1496,[9]=1497}},      -- Tomb of Sargeras
+    [909]  = {{1,2,3,4,5,6,7,8,9,10,11},          {[1]=1610,[4]=1611,[7]=1612,[10]=1613}},     -- Antorus, the Burning Throne
+    [1148] = {{1,2,4,3,5,6,7,8},                  {[1]=1731,[3]=1732,[7]=1733}},               -- Uldir
+    [1352] = {{1,3,2,4,5,6,7,8},                  {[1]=1945,[4]=1946,[7]=1947}},               -- Battle of Dazar'alor (Alliance)
+    [1358] = {{1,2,3,4,5,6,7,8},                  {[1]=1948,[4]=1949,[7]=1950}},               -- Battle of Dazar'alor (Horde)
+
+    -- TODO: Order
+    -- [1512] = {{1,2,3,4,7,8,5,6,9,10},             {[1]=2009,[4]=2010,[7]=2011}},                -- The Eternal Palace
+    -- [1582] = {{1,2,3,4,7,8,5,6,9,10},             {[2]=2036,[4]=2037,[7]=2038,[10]=2039}},      -- Ny'alotha
+
+    [1735] = {{2,5,6,3,4,7,1,8,9,10},             {[2]=2090,[3]=2091,[1]=2092,[10]=2096}},     -- Castle Nathria
 }
 
 --
@@ -133,19 +139,19 @@ function Addon:OnEventP(event, ...)
       return
     end
   elseif event == "PLAYER_LOGIN" then
-    if not saves then
+    if not AdventureGuideBosses_SavedVariables then
       -- Fresh install
-      saves = {version = Addon.savesVersion}
+      AdventureGuideBosses_SavedVariables = {version = Addon.savesVersion}
     else
       local dataConvert = {
         -- [1] = function(savesTable)
               -- -- Code to convert to savesVersion 2
               -- end
       }
-      while dataConvert[saves.version] do
+      while dataConvert[AdventureGuideBosses_SavedVariables.version] do
         -- Call the data conversion code, and increment saves version
-        dataConvert[saves.version](saves)
-        saves.version = saves.version + 1
+        dataConvert[AdventureGuideBosses_SavedVariables.version](AdventureGuideBosses_SavedVariables)
+        AdventureGuideBosses_SavedVariables.version = AdventureGuideBosses_SavedVariables.version + 1
       end
     end
   end

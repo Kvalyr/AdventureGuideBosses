@@ -1,8 +1,8 @@
-## Interface: 80100
+## Interface: 90002
 ## Title: AdventureGuideBosses
 ## Author: Softea-Lethon
-## Version: 1.0.1
-## Notes: Correctly orders bosses in the adventure guide, and adds raid wing tags.
-## SavedVariables: saves
+## Version: 1.0.2
+## Notes: Orders bosses in the adventure guide according to LFR wings, and adds raid wing tags.
+## SavedVariables: AdventureGuideBosses_SavedVariables
 
 main.lua
