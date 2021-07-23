@@ -1,7 +1,7 @@
-## Interface: 90002
+## Interface: 90100
 ## Title: AdventureGuideBosses
-## Author: Softea-Lethon
-## Version: 1.0.3
+## Author: Softea-Lethon, Updates by Kvalyr & Fabiocm
+## Version: 1.0.4
 ## Notes: Orders bosses in the adventure guide according to LFR wings, and adds raid wing tags.
 ## SavedVariables: AdventureGuideBosses_SavedVariables
 
